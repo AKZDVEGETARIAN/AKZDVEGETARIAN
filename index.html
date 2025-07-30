@@ -134,13 +134,32 @@
     <a href="tel:+256782793312">Call Me: +256 782 793312</a>
   </div>
 
-  <h2>Contact Form</h2>
+<!-- Add EmailJS SDK -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("56yxobXXgKV90HMD2"); // Your Public Key
+  })();
+</script>
+
 <form id="contact-form">
-  <input type="text" name="from_name" placeholder="Your Name" required>
-  <input type="email" name="reply_to" placeholder="Your Email" required>
-  <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-  <button type="submit">Send Message</button>
+  <input type="text" name="from_name" placeholder="Your Name" required><br>
+  <input type="email" name="reply_to" placeholder="Your Email" required><br>
+  <textarea name="message" placeholder="Your Message" required></textarea><br>
+  <button type="submit">Send</button>
 </form>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  emailjs.sendForm('service_z74e9rj', 'template_f284fz2', this)
+    .then(function() {
+      alert('Message sent!');
+    }, function(error) {
+      alert('FAILED... ' + JSON.stringify(error));
+    });
+});
+</script>
 <!-- Place this script block after the form or in the <head> -->
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
