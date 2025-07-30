@@ -19,7 +19,7 @@
     .contact-info { margin: 25px 0; }
     .contact-info a { color: #f2b705; text-decoration: none; margin-right: 18px; }
     .footer { background: #222; color: #aaa; text-align: center; padding: 18px 10px 10px 10px; font-size: 15px; letter-spacing: 1px; }
-    /* Floating Buttons */
+    /* Floating Buttons Right */
     .floating-btns {
       position: fixed;
       bottom: 25px;
@@ -30,7 +30,7 @@
       z-index: 999;
     }
     .floating-btn {
-      background: #f2b705;
+      background: #fff;
       color: #111;
       border: none;
       border-radius: 50%;
@@ -44,11 +44,45 @@
       cursor: pointer;
       transition: background 0.18s;
       text-decoration: none;
+      border: 2px solid #f2b705;
     }
-    .floating-btn:hover { background: #fff; color: #f2b705; }
+    .floating-btn:hover { background: #f2b705; }
+    .floating-btn img { width: 32px; height: 32px; display: block; }
+    /* Floating Buttons Left */
+    .floating-btns-left {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+    }
+    .floating-btn-left {
+      background: #fff;
+      color: #111;
+      border: none;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #e0c3fc55;
+      cursor: pointer;
+      transition: background 0.18s;
+      text-decoration: none;
+      border: 2px solid #f2b705;
+    }
+    .floating-btn-left:hover { background: #f2b705; }
+    .floating-btn-left img { width: 32px; height: 32px; display: block; }
     @media (max-width: 600px) {
       section { padding: 16px; }
       .footer { font-size: 13px; }
+      .floating-btns, .floating-btns-left { bottom: 15px; right: 10px; left: 10px; }
+      .floating-btn, .floating-btn-left { width: 46px; height: 46px; }
+      .floating-btn img, .floating-btn-left img { width: 24px; height: 24px; }
     }
   </style>
   <!-- EmailJS SDK -->
@@ -74,7 +108,7 @@
 <body>
 
 <header>
-  <img src="https://i.postimg.cc/tJ5tP86M/IMG-20250728-WA0006.jpg" alt="AKZDVEGETARIAN Photo">
+  <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="AKZDVEGETARIAN Photo">
   <h1>AKZDVEGETARIAN</h1>
   <p>Official Music Artist</p>
 </header>
@@ -101,19 +135,35 @@
   </form>
 </section>
 
-<!-- Floating Action Buttons -->
+<!-- Floating Action Buttons Right (social/contact) -->
 <div class="floating-btns">
   <!-- WhatsApp -->
   <a class="floating-btn" href="https://wa.me/256706682450" title="Chat on WhatsApp" target="_blank" aria-label="WhatsApp">
-    <span style="font-size:1.3em;">🟢</span>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
   <!-- Email -->
   <a class="floating-btn" href="mailto:akzdvegetarian@gmail.com" title="Send Email" aria-label="Email">
-    <span style="font-size:1.2em;">✉️</span>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email">
   </a>
-  <!-- Instagram (replace link as needed) -->
+  <!-- Instagram -->
   <a class="floating-btn" href="https://instagram.com/artist_handle" title="Instagram" target="_blank" aria-label="Instagram">
-    <span style="font-size:1.2em;">📸</span>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+  </a>
+</div>
+
+<!-- Floating Action Buttons Left (site navigation) -->
+<div class="floating-btns-left">
+  <!-- Music -->
+  <a class="floating-btn-left" href="index2.html" title="Music" aria-label="Music">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Iconic_image_of_music_note.png" alt="Music">
+  </a>
+  <!-- Videos -->
+  <a class="floating-btn-left" href="index3.html" title="Videos" aria-label="Videos">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Video-Icon.png" alt="Videos">
+  </a>
+  <!-- Inspiration -->
+  <a class="floating-btn-left" href="index4.html" title="Inspiration" aria-label="Inspiration">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Lightbulb_icon.svg" alt="Inspiration">
   </a>
 </div>
 
