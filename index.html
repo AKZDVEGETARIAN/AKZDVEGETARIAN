@@ -3,99 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AKZDVEGETARIAN | Official Music Site</title>
+  <title>AKZDVEGETARIAN | Home</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #111; color: #fff; }
-    header { background: #222; padding: 20px; text-align: center; }
-    header h1 { margin: 0; color: #f2b705; }
-    nav { text-align: center; background: #333; padding: 10px 0; }
-    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    section { padding: 30px; max-width: 800px; margin: auto; }
-    footer { background: #222; color: #aaa; text-align: center; padding: 10px; font-size: 14px; }
-    img { width: 100%; max-width: 400px; display: block; margin: 20px auto; border-radius: 8px; }
-    audio { width: 100%; margin: 10px 0; }
-    .illustration { max-width: 90%; display: block; margin: 1.2em auto 1.7em auto; border-radius: 12px; box-shadow: 0 2px 12px #e0c3fc55; }
+    header { background: #222; padding: 30px 20px 20px 20px; text-align: center; }
+    header img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #f2b705; margin-bottom: 14px; }
+    header h1 { margin: 0; color: #f2b705; font-size: 2.2em; }
+    header p { margin: 0; color: #fff; font-size: 1.1em; }
+    section { padding: 30px; max-width: 500px; margin: auto; }
+    h2 { color: #f2b705; }
+    form { background: #222; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px #0005; }
+    input, textarea { width: 100%; padding: 10px; margin: 8px 0 16px 0; border: none; border-radius: 6px; }
+    button { background: #f2b705; color: #111; border: none; border-radius: 6px; padding: 12px 26px; font-size: 1em; cursor: pointer; font-weight: bold; }
+    button:hover { background: #fff; color: #f2b705; }
+    .contact-info { margin: 25px 0; }
+    .contact-info a { color: #f2b705; text-decoration: none; margin-right: 18px; }
+    .footer { background: #222; color: #aaa; text-align: center; padding: 18px 10px 10px 10px; font-size: 15px; letter-spacing: 1px; }
+    /* Floating Buttons */
+    .floating-btns {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+    }
+    .floating-btn {
+      background: #f2b705;
+      color: #111;
+      border: none;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #e0c3fc55;
+      cursor: pointer;
+      transition: background 0.18s;
+      text-decoration: none;
+    }
+    .floating-btn:hover { background: #fff; color: #f2b705; }
+    @media (max-width: 600px) {
+      section { padding: 16px; }
+      .footer { font-size: 13px; }
+    }
   </style>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("56yxobXXgKV90HMD2");
+    })();
+    window.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        emailjs.sendForm('service_z74e9rj', 'template_f284fz2', this)
+          .then(function() {
+            alert('Message sent!');
+            document.getElementById('contact-form').reset();
+          }, function(error) {
+            alert('FAILED... ' + JSON.stringify(error));
+          });
+      });
+    });
+  </script>
 </head>
 <body>
 
 <header>
-  <h1>🎵 AKZDVEGETARIAN</h1>
-  <p>Official Music Website</p>
+  <img src="https://i.postimg.cc/tJ5tP86M/IMG-20250728-WA0006.jpg" alt="AKZDVEGETARIAN Photo">
+  <h1>AKZDVEGETARIAN</h1>
+  <p>Official Music Artist</p>
 </header>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#music">Music</a>
-  <a href="#photos">Photos</a>
-  <a href="#contact">Contact</a>
-</nav>
+<section>
+  <h2>About Me</h2>
+  <p>
+    Hi! I am <strong>AKZDVEGETARIAN</strong>, an artist blending traditional Ugandan rhythms with modern beats.<br>
+    My music is inspired by local culture, stories, and a journey rooted in creative exploration.<br>
+    Connect with me, listen to my music, and be inspired!
+  </p>
+  <div class="contact-info">
+    <strong>Contact:</strong><br>
+    <a href="mailto:akzdvegetarian@gmail.com">akzdvegetarian@gmail.com</a><br>
+    <a href="https://wa.me/256706682450" target="_blank">WhatsApp Me</a>
+  </div>
 
-<!-- Chapter Illustration -->
-<img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="Chapter 1 Illustration" class="illustration">
-
-<section id="about">
-  <h2>About the Artist</h2>
-  <p>AKZDVEGETARIAN is a passionate musician blending traditional Ugandan rhythms with modern beats. Inspired by local culture and global trends, their journey started with grassroots performances and now features original tracks that push creative boundaries.</p>
-</section>
-  <!-- Add EmailJS SDK -->
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  (function(){
-    emailjs.init("56yxobXXgKV90HMD2"); // Your Public Key
-  })();
-</script>
-
-<form id="contact-form">
-  <input type="text" name="from_name" placeholder="Your Name" required><br>
-  <input type="email" name="reply_to" placeholder="Your Email" required><br>
-  <textarea name="message" placeholder="Your Message" required></textarea><br>
-  <button type="submit">Send</button>
-</form>
-
-<script>
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-  emailjs.sendForm('service_z74e9rj', 'template_f284fz2', this)
-    .then(function() {
-      alert('Message sent!');
-    }, function(error) {
-      alert('FAILED... ' + JSON.stringify(error));
-    });
-});
-</script>
-
-<section id="music">
-  <h2>Listen to My Music</h2>
-  <p>Sample Tracks:</p>
-  <p>Ebitasoboka</p>
-  <audio controls>
-    <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Ebitasoboka%20By%20AKZD%20Music%5BAmbo%20beats%200701337598%5D-4.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <p>tulye-omutyele</p>
-  <audio controls>
-    <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulye-omutyere_akzd.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+  <h2>Contact Form</h2>
+  <form id="contact-form">
+    <input type="text" name="from_name" placeholder="Your Name" required>
+    <input type="email" name="reply_to" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
 </section>
 
-<section id="photos">
-  <h2>Gallery</h2>
-  <img src="images/photo1.jpg" alt="Artist Photo 1">
-  <img src="images/photo2.jpg" alt="Artist Photo 2">
-</section>
+<!-- Floating Action Buttons -->
+<div class="floating-btns">
+  <!-- WhatsApp -->
+  <a class="floating-btn" href="https://wa.me/256706682450" title="Chat on WhatsApp" target="_blank" aria-label="WhatsApp">
+    <span style="font-size:1.3em;">🟢</span>
+  </a>
+  <!-- Email -->
+  <a class="floating-btn" href="mailto:akzdvegetarian@gmail.com" title="Send Email" aria-label="Email">
+    <span style="font-size:1.2em;">✉️</span>
+  </a>
+  <!-- Instagram (replace link as needed) -->
+  <a class="floating-btn" href="https://instagram.com/artist_handle" title="Instagram" target="_blank" aria-label="Instagram">
+    <span style="font-size:1.2em;">📸</span>
+  </a>
+</div>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:akzdvegetarian@gmail.com">akzdvegetarian@gmail.com</a></p>
-  <p>WhatsApp: <a href="https://wa.me/256706682450" target="_blank">Message on WhatsApp</a></p>
-  <p>Instagram: <a href="https://instagram.com/artist_handle" target="_blank">@artist_handle</a></p>
-</section>
-
-<footer>
+<div class="footer">
   &copy; 2025 AKZDVEGETARIAN. All rights reserved.
-</footer>
+</div>
 
 </body>
 </html>
