@@ -30,7 +30,58 @@
       display: block;
       min-height: 1.25em;
     }
-    audio { width: 100%; margin-top: 8px; }
+    .music-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .music-btn {
+      background: #f2b705;
+      border: none;
+      color: #181818;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3em;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .music-btn:active,
+    .music-btn:hover {
+      background: #fff;
+      color: #f2b705;
+    }
+    .music-progress {
+      flex: 1;
+      height: 6px;
+      background: #444;
+      border-radius: 3px;
+      position: relative;
+      margin: 0 7px;
+      cursor: pointer;
+    }
+    .music-progress-bar {
+      background: #f2b705;
+      height: 100%;
+      border-radius: 3px;
+      width: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: width 0.1s;
+    }
+    .music-time {
+      font-size: 0.95em;
+      color: #f2b705;
+      min-width: 52px;
+      text-align: right;
+      user-select: none;
+    }
     .download-link {
       display: inline-block;
       margin-top: 9px;
@@ -45,96 +96,6 @@
     }
     .download-link:hover { background: #fff; color: #f2b705; }
     .footer { background: #222; color: #aaa; text-align: center; padding: 18px 10px 10px 10px; font-size: 15px; letter-spacing: 1px; }
-    /* Floating Buttons Right */
-    .floating-btns {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      z-index: 999;
-    }
-    .floating-btn {
-      background: #fff;
-      color: #111;
-      border: none;
-      border-radius: 50%;
-      width: 58px;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-      box-shadow: 0 2px 12px #e0c3fc55;
-      cursor: pointer;
-      transition: background 0.18s;
-      text-decoration: none;
-      border: 2px solid #f2b705;
-    }
-    .floating-btn:hover { background: #f2b705; }
-    .floating-btn img { width: 32px; height: 32px; display: block; }
-    /* Floating Buttons Left */
-    .floating-btns-left {
-      position: fixed;
-      bottom: 25px;
-      left: 25px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      z-index: 999;
-    }
-    .floating-btn-left {
-      background: #fff;
-      color: #111;
-      border: none;
-      border-radius: 50%;
-      width: 58px;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-      box-shadow: 0 2px 12px #e0c3fc55;
-      cursor: pointer;
-      transition: background 0.18s;
-      text-decoration: none;
-      border: 2px solid #f2b705;
-    }
-    .floating-btn-left:hover { background: #f2b705; }
-    .floating-btn-left img { width: 32px; height: 32px; display: block; }
-    /* Back to top and Home floating (bottom center) */
-    .floating-btns-center {
-      position: fixed;
-      bottom: 25px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      z-index: 999;
-      align-items: center;
-    }
-    .floating-btn-center {
-      background: #fff;
-      color: #111;
-      border: none;
-      border-radius: 50%;
-      width: 58px;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-      box-shadow: 0 2px 12px #e0c3fc55;
-      cursor: pointer;
-      transition: background 0.18s;
-      text-decoration: none;
-      border: 2px solid #f2b705;
-      margin-bottom: 0;
-    }
-    .floating-btn-center:hover { background: #f2b705; }
-    .floating-btn-center img { width: 32px; height: 32px; display: block; }
     @media (max-width: 700px) {
       section { padding: 16px 2vw; }
       .track { flex-direction: column; align-items: flex-start; gap: 10px; }
@@ -143,9 +104,8 @@
     }
     @media (max-width: 600px) {
       .footer { font-size: 13px; }
-      .floating-btns, .floating-btns-left, .floating-btns-center { bottom: 15px; right: 10px; left: 10px; }
-      .floating-btn, .floating-btn-left, .floating-btn-center { width: 46px; height: 46px; }
-      .floating-btn img, .floating-btn-left img, .floating-btn-center img { width: 24px; height: 24px; }
+      .music-btn { width: 30px; height: 30px; font-size: 1.1em; }
+      .music-time { font-size: 0.85em; min-width: 36px; }
     }
   </style>
 </head>
@@ -174,10 +134,16 @@
         <div class="track-title">Ebitasoboka</div>
         <div class="track-meta">By AKZDVEGETARIAN</div>
         <span class="track-duration" id="duration-ebitasoboka"></span>
-        <audio controls data-duration-id="duration-ebitasoboka">
-          <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Ebitasoboka%20By%20AKZD%20Music%5BAmbo%20beats%200701337598%5D-4.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+        <div class="music-controls" data-track="ebitasoboka">
+          <button class="music-btn playpause" aria-label="Play/Pause"><span>►</span></button>
+          <div class="music-progress">
+            <div class="music-progress-bar"></div>
+          </div>
+          <span class="music-time" aria-label="Time">0:00 / --:--</span>
+          <audio preload="metadata">
+            <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Ebitasoboka%20By%20AKZD%20Music%5BAmbo%20beats%200701337598%5D-4.mp3" type="audio/mpeg">
+          </audio>
+        </div>
         <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Ebitasoboka%20By%20AKZD%20Music%5BAmbo%20beats%200701337598%5D-4.mp3" download>Download</a>
       </div>
     </div>
@@ -188,10 +154,16 @@
         <div class="track-title">Tulye Omutyere</div>
         <div class="track-meta">By AKZDVEGETARIAN</div>
         <span class="track-duration" id="duration-tulye"></span>
-        <audio controls data-duration-id="duration-tulye">
-          <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulye-omutyere_akzd.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+        <div class="music-controls" data-track="tulye">
+          <button class="music-btn playpause" aria-label="Play/Pause"><span>►</span></button>
+          <div class="music-progress">
+            <div class="music-progress-bar"></div>
+          </div>
+          <span class="music-time" aria-label="Time">0:00 / --:--</span>
+          <audio preload="metadata">
+            <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulye-omutyere_akzd.mp3" type="audio/mpeg">
+          </audio>
+        </div>
         <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulye-omutyere_akzd.mp3" download>Download</a>
       </div>
     </div>
@@ -202,10 +174,16 @@
         <div class="track-title">Tulibalukana</div>
         <div class="track-meta">By AKZD ft Dab Why</div>
         <span class="track-duration" id="duration-tulibalukana"></span>
-        <audio controls data-duration-id="duration-tulibalukana">
-          <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulibalukana%20by%20AKZD%20ft%20Dab%20Why-1.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+        <div class="music-controls" data-track="tulibalukana">
+          <button class="music-btn playpause" aria-label="Play/Pause"><span>►</span></button>
+          <div class="music-progress">
+            <div class="music-progress-bar"></div>
+          </div>
+          <span class="music-time" aria-label="Time">0:00 / --:--</span>
+          <audio preload="metadata">
+            <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulibalukana%20by%20AKZD%20ft%20Dab%20Why-1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
         <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulibalukana%20by%20AKZD%20ft%20Dab%20Why-1.mp3" download>Download</a>
       </div>
     </div>
@@ -216,10 +194,16 @@
         <div class="track-title">The Answer Foundation</div>
         <div class="track-meta">By AKZD ft Datah Pearl</div>
         <span class="track-duration" id="duration-answer-foundation"></span>
-        <audio controls data-duration-id="duration-answer-foundation">
-          <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/The%20Answer%20Foundation_by_AKZD_ft_Datah%20Pearl%20-2.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+        <div class="music-controls" data-track="answer-foundation">
+          <button class="music-btn playpause" aria-label="Play/Pause"><span>►</span></button>
+          <div class="music-progress">
+            <div class="music-progress-bar"></div>
+          </div>
+          <span class="music-time" aria-label="Time">0:00 / --:--</span>
+          <audio preload="metadata">
+            <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/The%20Answer%20Foundation_by_AKZD_ft_Datah%20Pearl%20-2.mp3" type="audio/mpeg">
+          </audio>
+        </div>
         <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/The%20Answer%20Foundation_by_AKZD_ft_Datah%20Pearl%20-2.mp3" download>Download</a>
       </div>
     </div>
@@ -230,10 +214,16 @@
         <div class="track-title">Nkuwa Mukilo</div>
         <div class="track-meta">By AKZD MUSIC</div>
         <span class="track-duration" id="duration-nkuwa-mukilo"></span>
-        <audio controls data-duration-id="duration-nkuwa-mukilo">
-          <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/NKUWA%20MUKILO%20BY%20AKZD%20MUSIC-1.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+        <div class="music-controls" data-track="nkuwa-mukilo">
+          <button class="music-btn playpause" aria-label="Play/Pause"><span>►</span></button>
+          <div class="music-progress">
+            <div class="music-progress-bar"></div>
+          </div>
+          <span class="music-time" aria-label="Time">0:00 / --:--</span>
+          <audio preload="metadata">
+            <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/NKUWA%20MUKILO%20BY%20AKZD%20MUSIC-1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
         <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/NKUWA%20MUKILO%20BY%20AKZD%20MUSIC-1.mp3" download>Download</a>
       </div>
     </div>
@@ -244,33 +234,97 @@
   &copy; 2025 AKZDVEGETARIAN. All rights reserved.
 </div>
 <script>
-  // Helper to format seconds to mm:ss
+  // Format seconds to mm:ss
   function formatDuration(sec) {
     sec = Math.floor(sec);
     const min = Math.floor(sec / 60);
     const s = sec % 60;
     return min + ":" + (s < 10 ? "0" : "") + s;
   }
-  // For each audio, show duration
+
+  // Custom controls logic for all tracks
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('audio[data-duration-id]').forEach(function(audio) {
-      // If already loaded, show duration
-      function setTimeOrWait() {
-        if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
-          var span = document.getElementById(audio.getAttribute('data-duration-id'));
-          if(span) span.textContent = "Duration: " + formatDuration(audio.duration);
-        } else {
-          // Try again after loadedmetadata
-          audio.addEventListener('loadedmetadata', function handler() {
-            audio.removeEventListener('loadedmetadata', handler);
-            var span = document.getElementById(audio.getAttribute('data-duration-id'));
-            if(span) span.textContent = "Duration: " + formatDuration(audio.duration);
-          });
+    const controls = document.querySelectorAll('.music-controls');
+    let currentlyPlaying = null;
+
+    controls.forEach(ctrl => {
+      const audio = ctrl.querySelector('audio');
+      const playpause = ctrl.querySelector('.playpause');
+      const progress = ctrl.querySelector('.music-progress');
+      const progressBar = ctrl.querySelector('.music-progress-bar');
+      const time = ctrl.querySelector('.music-time');
+      const durationId = ctrl.closest('.track-info').querySelector('.track-duration')?.id;
+
+      // Show duration when metadata loads
+      audio.addEventListener('loadedmetadata', function() {
+        if (durationId) {
+          const durSpan = document.getElementById(durationId);
+          if (durSpan) durSpan.textContent = "Duration: " + formatDuration(audio.duration);
         }
-      }
-      setTimeOrWait();
+        time.textContent = "0:00 / " + formatDuration(audio.duration);
+      });
+
+      // Play/pause logic
+      playpause.addEventListener('click', function() {
+        if (audio.paused) {
+          // Pause any other playing audio
+          controls.forEach(otherCtrl => {
+            const otherAudio = otherCtrl.querySelector('audio');
+            if (otherAudio !== audio) {
+              otherAudio.pause();
+              otherCtrl.querySelector('.playpause span').textContent = '►';
+            }
+          });
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      });
+
+      // Update play button and time display
+      audio.addEventListener('play', function() {
+        playpause.querySelector('span').textContent = '❚❚';
+        currentlyPlaying = audio;
+      });
+      audio.addEventListener('pause', function() {
+        playpause.querySelector('span').textContent = '►';
+        if (currentlyPlaying === audio) currentlyPlaying = null;
+      });
+
+      // Progress bar and current time update
+      audio.addEventListener('timeupdate', function() {
+        if (audio.duration) {
+          const percent = (audio.currentTime / audio.duration) * 100;
+          progressBar.style.width = percent + '%';
+          time.textContent = formatDuration(audio.currentTime) + ' / ' + formatDuration(audio.duration);
+        }
+      });
+
+      // Click to seek
+      progress.addEventListener('click', function(e) {
+        if (!audio.duration) return;
+        const rect = progress.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const ratio = x / rect.width;
+        audio.currentTime = ratio * audio.duration;
+      });
+
+      // Reset when ended
+      audio.addEventListener('ended', function() {
+        playpause.querySelector('span').textContent = '►';
+        progressBar.style.width = '0%';
+        time.textContent = "0:00 / " + formatDuration(audio.duration);
+      });
+    });
+
+    // Pause all if navigating away
+    window.addEventListener('beforeunload', function() {
+      controls.forEach(ctrl => {
+        const audio = ctrl.querySelector('audio');
+        audio.pause();
+      });
     });
   });
 </script>
 </body>
-</html>
+  </html>
