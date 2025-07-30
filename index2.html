@@ -1,1 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AKZDVEGETARIAN | Music</title>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #181818; color: #fff; }
+    header { background: #222; padding: 30px 20px 20px 20px; text-align: center; }
+    header h1 { margin: 0; color: #f2b705; font-size: 2em; }
+    header p { margin: 0; color: #fff; font-size: 1.1em; }
+    nav { text-align: center; background: #292929; padding: 12px 0; }
+    nav a { color: #fff; margin: 0 16px; text-decoration: none; font-weight: bold; }
+    nav a.active, nav a:hover { color: #f2b705; }
+    section { padding: 30px 12px; max-width: 700px; margin: auto; }
+    h2 { color: #f2b705; }
+    .music-list { display: flex; flex-direction: column; gap: 24px; margin-top: 20px; }
+    .track { background: #242424; border-radius: 10px; padding: 20px; display: flex; align-items: center; gap: 20px; box-shadow: 0 2px 10px #0005; }
+    .track img { width: 72px; height: 72px; border-radius: 10px; object-fit: cover; }
+    .track-info { flex: 1; }
+    .track-title { font-size: 1.15em; font-weight: bold; color: #fff; }
+    .track-meta { font-size: 0.96em; color: #f2b705; }
+    audio { width: 100%; margin-top: 8px; }
+    .footer { background: #222; color: #aaa; text-align: center; padding: 18px 10px 10px 10px; font-size: 15px; letter-spacing: 1px; }
+    /* Floating Buttons Right */
+    .floating-btns {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+    }
+    .floating-btn {
+      background: #fff;
+      color: #111;
+      border: none;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #e0c3fc55;
+      cursor: pointer;
+      transition: background 0.18s;
+      text-decoration: none;
+      border: 2px solid #f2b705;
+    }
+    .floating-btn:hover { background: #f2b705; }
+    .floating-btn img { width: 32px; height: 32px; display: block; }
+    /* Floating Buttons Left */
+    .floating-btns-left {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+    }
+    .floating-btn-left {
+      background: #fff;
+      color: #111;
+      border: none;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #e0c3fc55;
+      cursor: pointer;
+      transition: background 0.18s;
+      text-decoration: none;
+      border: 2px solid #f2b705;
+    }
+    .floating-btn-left:hover { background: #f2b705; }
+    .floating-btn-left img { width: 32px; height: 32px; display: block; }
+    /* Back to top and Home floating (bottom center) */
+    .floating-btns-center {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+      align-items: center;
+    }
+    .floating-btn-center {
+      background: #fff;
+      color: #111;
+      border: none;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #e0c3fc55;
+      cursor: pointer;
+      transition: background 0.18s;
+      text-decoration: none;
+      border: 2px solid #f2b705;
+      margin-bottom: 0;
+    }
+    .floating-btn-center:hover { background: #f2b705; }
+    .floating-btn-center img { width: 32px; height: 32px; display: block; }
+    @media (max-width: 700px) {
+      section { padding: 16px 2vw; }
+      .track { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .track img { width: 60px; height: 60px; }
+    }
+    @media (max-width: 600px) {
+      .footer { font-size: 13px; }
+      .floating-btns, .floating-btns-left, .floating-btns-center { bottom: 15px; right: 10px; left: 10px; }
+      .floating-btn, .floating-btn-left, .floating-btn-center { width: 46px; height: 46px; }
+      .floating-btn img, .floating-btn-left img, .floating-btn-center img { width: 24px; height: 24px; }
+    }
+  </style>
+</head>
+<body id="top">
 
+<header>
+  <h1>AKZDVEGETARIAN</h1>
+  <p>🎶 Music Collection 🎶</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="index2.html" class="active">Music</a>
+  <a href="index3.html">Videos</a>
+  <a href="index4.html">Inspiration</a>
+</nav>
+
+<section>
+  <h2>My Music Tracks</h2>
+  <div class="music-list">
+    <!-- Track 1 -->
+    <div class="track">
+      <img src="https://i.postimg.cc/tJ5tP86M/IMG-20250728-WA0006.jpg" alt="Ebitasoboka">
+      <div class="track-info">
+        <div class="track-title">Ebitasoboka</div>
+        <div class="track-meta">By AKZDVEGETARIAN</div>
+        <audio controls>
+          <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Ebitasoboka%20By%20AKZD%20Music%5BAmbo%20beats%200701337598%5D-4.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <!-- Track 2 -->
+    <div class="track">
+      <img src="https://i.postimg.cc/tJ5tP86M/IMG-20250728-WA0006.jpg" alt="Tulye Omutyere">
+      <div class="track-info">
+        <div class="track-title">Tulye Omutyere</div>
+        <div class="track-meta">By AKZDVEGETARIAN</div>
+        <audio controls>
+          <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulye-omutyere_akzd.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <!-- Add more tracks here -->
+  </div>
+</section>
+
+<!-- Floating Action Buttons Right (social/contact) -->
+<div class="floating-btns">
+  <!-- WhatsApp -->
+  <a class="floating-btn" href="https://wa.me/256706682450" title="Chat on WhatsApp" target="_blank" aria-label="WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+  <!-- Email -->
+  <a class="floating-btn" href="mailto:akzdvegetarian@gmail.com" title="Send Email" aria-label="Email">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email">
+  </a>
+  <!-- Instagram -->
+  <a class="floating-btn" href="https://instagram.com/artist_handle" title="Instagram" target="_blank" aria-label="Instagram">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+  </a>
+</div>
+
+<!-- Floating Action Buttons Left (site navigation) -->
+<div class="floating-btns-left">
+  <!-- Music (current page, highlight or disable if you wish) -->
+  <a class="floating-btn-left" href="index2.html" title="Music" aria-label="Music">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Iconic_image_of_music_note.png" alt="Music">
+  </a>
+  <!-- Videos -->
+  <a class="floating-btn-left" href="index3.html" title="Videos" aria-label="Videos">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Video-Icon.png" alt="Videos">
+  </a>
+  <!-- Inspiration -->
+  <a class="floating-btn-left" href="index4.html" title="Inspiration" aria-label="Inspiration">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Lightbulb_icon.svg" alt="Inspiration">
+  </a>
+</div>
+
+<!-- Floating Action Buttons Center (Back to Top, Back Home) -->
+<div class="floating-btns-center">
+  <!-- Back to Top -->
+  <a class="floating-btn-center" href="#top" title="Back to Top" aria-label="Back to Top">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Arrow_up_font_awesome.svg" alt="Back to Top">
+  </a>
+  <!-- Back Home -->
+  <a class="floating-btn-center" href="index.html" title="Back Home" aria-label="Back Home">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Home_font_awesome.svg" alt="Back Home">
+  </a>
+</div>
+
+<div class="footer">
+  &copy; 2025 AKZDVEGETARIAN. All rights reserved.
+</div>
+
+</body>
+    </html>
