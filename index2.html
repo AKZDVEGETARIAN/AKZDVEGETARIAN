@@ -22,6 +22,14 @@
     .track-info { flex: 1; }
     .track-title { font-size: 1.15em; font-weight: bold; color: #fff; }
     .track-meta { font-size: 0.96em; color: #f2b705; }
+    .track-duration {
+      font-size: 0.95em;
+      color: #aaa;
+      margin-top: 2px;
+      margin-bottom: 10px;
+      display: block;
+      min-height: 1.25em;
+    }
     audio { width: 100%; margin-top: 8px; }
     .download-link {
       display: inline-block;
@@ -165,7 +173,8 @@
       <div class="track-info">
         <div class="track-title">Ebitasoboka</div>
         <div class="track-meta">By AKZDVEGETARIAN</div>
-        <audio controls>
+        <span class="track-duration" id="duration-ebitasoboka"></span>
+        <audio controls data-duration-id="duration-ebitasoboka">
           <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Ebitasoboka%20By%20AKZD%20Music%5BAmbo%20beats%200701337598%5D-4.mp3" type="audio/mpeg">
           Your browser does not support the audio element.
         </audio>
@@ -178,7 +187,8 @@
       <div class="track-info">
         <div class="track-title">Tulye Omutyere</div>
         <div class="track-meta">By AKZDVEGETARIAN</div>
-        <audio controls>
+        <span class="track-duration" id="duration-tulye"></span>
+        <audio controls data-duration-id="duration-tulye">
           <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulye-omutyere_akzd.mp3" type="audio/mpeg">
           Your browser does not support the audio element.
         </audio>
@@ -189,11 +199,37 @@
   </div>
 </section>
 
-
-
 <div class="footer">
   &copy; 2025 AKZDVEGETARIAN. All rights reserved.
 </div>
-
+<script>
+  // Helper to format seconds to mm:ss
+  function formatDuration(sec) {
+    sec = Math.floor(sec);
+    const min = Math.floor(sec / 60);
+    const s = sec % 60;
+    return min + ":" + (s < 10 ? "0" : "") + s;
+  }
+  // For each audio, show duration
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('audio[data-duration-id]').forEach(function(audio) {
+      // If already loaded, show duration
+      function setTimeOrWait() {
+        if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
+          var span = document.getElementById(audio.getAttribute('data-duration-id'));
+          if(span) span.textContent = "Duration: " + formatDuration(audio.duration);
+        } else {
+          // Try again after loadedmetadata
+          audio.addEventListener('loadedmetadata', function handler() {
+            audio.removeEventListener('loadedmetadata', handler);
+            var span = document.getElementById(audio.getAttribute('data-duration-id'));
+            if(span) span.textContent = "Duration: " + formatDuration(audio.duration);
+          });
+        }
+      }
+      setTimeOrWait();
+    });
+  });
+</script>
 </body>
 </html>
