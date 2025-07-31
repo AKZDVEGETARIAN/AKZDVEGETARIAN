@@ -1,1 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AKZDVEGETARIAN | Inspiration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: radial-gradient(ellipse at top left, #232526 0%, #111 100%);
+      color: #fff;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(120deg, #232526 60%, #f2b70522 100%);
+      padding: 38px 20px 30px 20px;
+      text-align: center;
+      border-bottom: 1px solid #f2b70533;
+      position: relative;
+    }
+    header h1 {
+      margin: 0;
+      color: #f2b705;
+      font-size: 2em;
+      letter-spacing: 1.2px;
+      font-family: 'Bebas Neue', 'Segoe UI', Arial, sans-serif;
+      text-shadow: 2px 2px 30px #f2b70544, 0 2px 6px #fff2;
+      z-index: 1;
+      position: relative;
+    }
+    nav {
+      text-align: center;
+      background: #292929cc;
+      padding: 14px 0 14px 0;
+      border-bottom: 1px solid #f2b70522;
+      box-shadow: 0 4px 18px #f2b70519;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 18px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.08em;
+      letter-spacing: 1px;
+      transition: color 0.3s, border-bottom 0.3s;
+      padding-bottom: 3px;
+    }
+    nav a.active, nav a:hover {
+      color: #f2b705;
+    }
+    nav a.active::after, nav a:hover::after {
+      content: "";
+      display: block;
+      margin: auto;
+      width: 36%;
+      height: 3px;
+      background: linear-gradient(90deg, #f2b705 40%, #fff 100%);
+      border-radius: 2px;
+      margin-top: 2px;
+      transition: width 0.2s;
+    }
+    .main-content {
+      max-width: 750px;
+      margin: 40px auto 0 auto;
+      background: linear-gradient(120deg, #242424cc 70%, #363636bb 100%);
+      border-radius: 24px;
+      box-shadow: 0 6px 42px #f2b70509, 0 1.5px 8px #0006;
+      padding: 42px 4vw 32px 4vw;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(1.5px);
+      transition: box-shadow 0.28s;
+      animation: fadeInSection 1.2s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes fadeInSection {
+      0% { opacity: 0; transform: translateY(50px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    h2 {
+      color: #f2b705;
+      font-size: 1.7em;
+      letter-spacing: 1px;
+      margin-bottom: 0.7em;
+      font-family: 'Bebas Neue', 'Segoe UI', Arial, sans-serif;
+      text-shadow: 0 2px 16px #f2b70522;
+      position: relative;
+      display: inline-block;
+    }
+    .yt-video-wrapper {
+      width: 100%;
+      max-width: 650px;
+      margin: 32px auto 0 auto;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px #18181844, 0 1.5px 8px #f2b70522;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .yt-video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .footer {
+      background: #222;
+      color: #aaa;
+      text-align: center;
+      padding: 22px 10px 12px 10px;
+      font-size: 15.5px;
+      letter-spacing: 1.1px;
+      border-top: 1px solid #f2b70522;
+      margin-top: 70px;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 -2px 18px #f2b70511;
+    }
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, #ffe088 80%, #f2b705 120%);
+      color: #181818;
+      font-weight: bold;
+      padding: 10px 22px;
+      border-radius: 9px;
+      text-decoration: none;
+      font-size: 1.05em;
+      box-shadow: 0 1.5px 8px #f2b70544;
+      border: 1.5px solid #f2b70522;
+      margin-bottom: 20px;
+      transition: background 0.18s, color 0.18s, box-shadow 0.15s, transform 0.17s;
+    }
+    .back-home-btn:hover {
+      background: #fff;
+      color: #f2b705;
+      box-shadow: 0 2px 14px #f2b70577, 0 2px 10px #fff6;
+      transform: scale(1.04);
+    }
+    @media (max-width: 850px) {
+      .main-content { padding: 24px 2vw; }
+      .yt-video-wrapper { max-width: 98vw; }
+    }
+    @media (max-width: 480px) {
+      .main-content { padding: 10px 1vw; border-radius: 13px;}
+      .footer { font-size: 12px;}
+      .back-home-btn { font-size: 0.95em; padding: 7px 12px;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Inspiration</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#music">Music</a>
+    <a href="index3.html">Videos</a>
+    <a href="index4.html" class="active">Inspiration</a>
+  </nav>
 
+  <div class="main-content">
+    <a href="index.html" class="back-home-btn">🏡 Back to Home</a>
+    <h2>Inspirational Video</h2>
+    <div class="yt-video-wrapper">
+      <iframe src="https://www.youtube.com/embed/TwbhNhZ6W1U?si=Q917nopBsjyHSw1R" 
+        title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen></iframe>
+    </div>
+  </div>
+  <div class="footer">
+    &copy; 2025 AKZDVEGETARIAN. All rights reserved.
+    <span style="display:block; margin-top:10px; font-size:13px; color:#f2b70599; letter-spacing:0.5px;">
+      Designed by
+      <a href="mailto:nicholasbagenda@gmail.com" style="vertical-align:middle; text-decoration:none; color:#f2b705; font-weight:bold;">
+        <img src="https://i.postimg.cc/t4yDG3Fq/Mon-21-07-2025-16-26-06.png" 
+             alt="Designer Logo" 
+             style="height:22px; vertical-align:middle; margin-right:6px; border-radius:4px; box-shadow:0 1px 6px #0002;">
+        Nicholas Bagenda
+      </a>
+    </span>
+  </div>
+</body>
+    </html>
