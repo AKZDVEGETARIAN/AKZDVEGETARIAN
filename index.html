@@ -402,7 +402,9 @@
       border: none;
       border-radius: 50%;
       width: 62px; height: 62px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 2.2em;
       box-shadow: 0 2px 16px #e0c3fc55, 0 1.5px 8px #f2b70522;
       cursor: pointer;
@@ -411,6 +413,8 @@
       border: 2.2px solid #f2b705;
       filter: drop-shadow(0 2px 10px #fff4);
     }
+    .floating-btn-left.active,
+    .floating-btn-left:focus,
     .floating-btn-left:hover {
       background: #f2b705;
       color: #fff;
@@ -459,34 +463,49 @@
     });
   </script>
   <script>
-    // Make the navigation links "active" based on scroll or url
+    // Make the navigation links and floating buttons "active" based on scroll or url
     document.addEventListener('DOMContentLoaded', function () {
       function setActiveNav() {
-        const links = document.querySelectorAll('nav a');
-        links.forEach(link => link.classList.remove('active'));
+        // Top nav
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => link.classList.remove('active'));
+        let hash = window.location.hash;
+        let pathname = window.location.pathname;
         let found = false;
         // For hash links (Home, Music)
-        if (window.location.hash) {
-          links.forEach(link => {
-            if (link.getAttribute('href') === window.location.hash) {
+        if (hash) {
+          navLinks.forEach(link => {
+            if (link.getAttribute('href') === hash) {
               link.classList.add('active');
               found = true;
             }
           });
         }
         // If on root or index.html, set Home active
-        if ((!found && (window.location.pathname === '/' || window.location.pathname.endsWith('index.html')))) {
-          links[0].classList.add('active');
+        if ((!found && (pathname === '/' || pathname.endsWith('index.html')))) {
+          navLinks[0].classList.add('active');
         }
         // If on index3.html or index4.html, set those active
-        links.forEach(link => {
+        navLinks.forEach(link => {
           if (
-            (window.location.pathname.endsWith('index3.html') && link.getAttribute('href') === 'index3.html') ||
-            (window.location.pathname.endsWith('index4.html') && link.getAttribute('href') === 'index4.html')
+            (pathname.endsWith('index3.html') && link.getAttribute('href') === 'index3.html') ||
+            (pathname.endsWith('index4.html') && link.getAttribute('href') === 'index4.html')
           ) {
             link.classList.add('active');
           }
         });
+
+        // Floating left buttons
+        const floatBtns = document.querySelectorAll('.floating-btn-left');
+        floatBtns.forEach(btn => btn.classList.remove('active'));
+        // Home/About
+        if (hash === '#about' || (!hash && (pathname === '/' || pathname.endsWith('index.html')))) {
+          floatBtns[0].classList.add('active');
+        }
+        // Music
+        if (hash === '#music') {
+          floatBtns[1].classList.add('active');
+        }
       }
       setActiveNav();
       window.addEventListener('hashchange', setActiveNav);
@@ -501,6 +520,7 @@
   <p>Official Music Artist</p>
 </header>
 
+<!-- Top navigation -->
 <nav>
   <a href="#about">Home</a>
   <a href="#music">Music</a>
@@ -530,7 +550,10 @@
   </form>
 </section>
 
-<!-- Tagged Track 1 -->
+<!-- Music section for anchor -->
+<section id="music"></section>
+
+<!-- Example music tracks (your tracks go here) -->
 <div class="track">
   <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="Ebitasoboka (Tagged)">
   <div class="track-info">
@@ -543,7 +566,6 @@
     <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/tagmp3_Ebitasoboka-By-AKZD-Music%5BAmbo-beats-0701337598%5D-4.mp3" download>Download Tagged</a>
   </div>
 </div>
-<!-- Tagged Track 2 -->
 <div class="track">
   <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="Nkuwa Mukilo (Tagged)">
   <div class="track-info">
@@ -556,7 +578,6 @@
     <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/tagmp3_NKUWA-MUKILO-BY-AKZD-MUSIC.mp3" download>Download Tagged</a>
   </div>
 </div>
-<!-- Tagged Track 3 -->
 <div class="track">
   <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="The Answer Foundation (Tagged)">
   <div class="track-info">
@@ -689,4 +710,4 @@ document.addEventListener('DOMContentLoaded', function() {
     </a>
   </span>
 </div>
-</html>
+  </html>
