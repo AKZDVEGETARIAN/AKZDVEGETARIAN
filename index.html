@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AKZDVEGETARIAN | Home</title>
+  <title>AKZDVEGETARIAN | Home & Music</title>
   <style>
+    html { scroll-behavior: smooth; }
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #111; color: #fff; }
     header { background: #222; padding: 30px 20px 20px 20px; text-align: center; }
     header img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #f2b705; margin-bottom: 14px; }
     header h1 { margin: 0; color: #f2b705; font-size: 2.2em; }
     header p { margin: 0; color: #fff; font-size: 1.1em; }
-    section { padding: 30px; max-width: 500px; margin: auto; }
+    nav { text-align: center; background: #292929; padding: 12px 0; }
+    nav a { color: #fff; margin: 0 16px; text-decoration: none; font-weight: bold; }
+    nav a.active, nav a:hover { color: #f2b705; }
+    section { padding: 30px; max-width: 700px; margin: auto; }
     h2 { color: #f2b705; }
     form { background: #222; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px #0005; }
     input, textarea { width: 100%; padding: 10px; margin: 8px 0 16px 0; border: none; border-radius: 6px; }
@@ -19,36 +23,85 @@
     .contact-info { margin: 25px 0; }
     .contact-info a { color: #f2b705; text-decoration: none; margin-right: 18px; }
     .footer { background: #222; color: #aaa; text-align: center; padding: 18px 10px 10px 10px; font-size: 15px; letter-spacing: 1px; }
-
-    /* Floating Buttons Right */
-    .floating-btns {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      z-index: 999;
+    .music-list { display: flex; flex-direction: column; gap: 24px; margin-top: 20px; }
+    .track { background: #242424; border-radius: 10px; padding: 20px; display: flex; align-items: center; gap: 20px; box-shadow: 0 2px 10px #0005; }
+    .track img { width: 72px; height: 72px; border-radius: 10px; object-fit: cover; }
+    .track-info { flex: 1; }
+    .track-title { font-size: 1.15em; font-weight: bold; color: #fff; }
+    .track-meta { font-size: 0.96em; color: #f2b705; }
+    .track-duration {
+      font-size: 0.95em;
+      color: #aaa;
+      margin-top: 2px;
+      margin-bottom: 10px;
+      display: block;
+      min-height: 1.25em;
     }
-    .floating-btn {
-      background: #fff;
-      color: #111;
+    .music-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .music-btn {
+      background: #f2b705;
       border: none;
+      color: #181818;
+      font-weight: bold;
       border-radius: 50%;
-      width: 58px;
-      height: 58px;
+      width: 38px;
+      height: 38px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2em;
-      box-shadow: 0 2px 12px #e0c3fc55;
+      font-size: 1.3em;
       cursor: pointer;
       transition: background 0.18s;
-      text-decoration: none;
-      border: 2px solid #f2b705;
     }
-    .floating-btn:hover { background: #f2b705; }
-    .floating-btn img { width: 32px; height: 32px; display: block; }
+    .music-btn:active,
+    .music-btn:hover {
+      background: #fff;
+      color: #f2b705;
+    }
+    .music-progress {
+      flex: 1;
+      height: 6px;
+      background: #444;
+      border-radius: 3px;
+      position: relative;
+      margin: 0 7px;
+      cursor: pointer;
+    }
+    .music-progress-bar {
+      background: #f2b705;
+      height: 100%;
+      border-radius: 3px;
+      width: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: width 0.1s;
+    }
+    .music-time {
+      font-size: 0.95em;
+      color: #f2b705;
+      min-width: 52px;
+      text-align: right;
+      user-select: none;
+    }
+    .download-link {
+      display: inline-block;
+      margin-top: 9px;
+      background: #f2b705;
+      color: #181818;
+      font-weight: bold;
+      padding: 7px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.98em;
+      transition: background 0.18s;
+    }
+    .download-link:hover { background: #fff; color: #f2b705; }
 
     /* Floating Buttons Left */
     .floating-btns-left {
@@ -79,16 +132,21 @@
     }
     .floating-btn-left:hover { background: #f2b705; }
     .floating-btn-left img { width: 32px; height: 32px; display: block; }
+    .floating-btns-left { z-index: 1000; }
 
-    /* Ensure both button groups are always visible above other UI */
-    .floating-btns, .floating-btns-left { z-index: 1000; }
-
+    @media (max-width: 700px) {
+      section { padding: 16px 2vw; }
+      .track { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .track img { width: 60px; height: 60px; }
+      header img { width: 90px; height: 90px; }
+    }
     @media (max-width: 600px) {
-      section { padding: 16px; }
       .footer { font-size: 13px; }
-      .floating-btns, .floating-btns-left { bottom: 15px; right: 10px; left: 10px; }
-      .floating-btn, .floating-btn-left { width: 46px; height: 46px; }
-      .floating-btn img, .floating-btn-left img { width: 24px; height: 24px; }
+      .music-btn { width: 30px; height: 30px; font-size: 1.1em; }
+      .music-time { font-size: 0.85em; min-width: 36px; }
+      .floating-btns-left { bottom: 15px; left: 10px; }
+      .floating-btn-left { width: 46px; height: 46px; }
+      .floating-btn-left img { width: 24px; height: 24px; }
     }
   </style>
   <!-- EmailJS SDK -->
@@ -111,7 +169,7 @@
     });
   </script>
 </head>
-<body>
+<body id="top">
 
 <header>
   <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="AKZDVEGETARIAN Photo">
@@ -119,7 +177,14 @@
   <p>Official Music Artist</p>
 </header>
 
-<section>
+<nav>
+  <a href="#about" class="active">Home</a>
+  <a href="#music">Music</a>
+  <a href="index3.html">Videos</a>
+  <a href="index4.html">Inspiration</a>
+</nav>
+
+<section id="about">
   <h2>About Me</h2>
   <p>
     Hi! I am <strong>AKZDVEGETARIAN</strong>, an artist blending traditional Ugandan rhythms with modern beats.<br>
@@ -142,10 +207,110 @@
   </form>
 </section>
 
+<section id="music">
+  <h2>My Music Tracks</h2>
+  <div class="music-list">
+    <!-- Track 1 -->
+    <div class="track">
+      <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="Ebitasoboka">
+      <div class="track-info">
+        <div class="track-title">Ebitasoboka</div>
+        <div class="track-meta">By AKZDVEGETARIAN</div>
+        <span class="track-duration" id="duration-ebitasoboka"></span>
+        <div class="music-controls" data-track="ebitasoboka">
+          <button class="music-btn playpause" aria-label="Play/Pause"><span>►</span></button>
+          <div class="music-progress"><div class="music-progress-bar"></div></div>
+          <span class="music-time" aria-label="Time">0:00 / --:--</span>
+          <audio preload="metadata">
+            <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Ebitasoboka%20By%20AKZD%20Music%5BAmbo%20beats%200701337598%5D-4.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Ebitasoboka%20By%20AKZD%20Music%5BAmbo%20beats%200701337598%5D-4.mp3" download>Download</a>
+      </div>
+    </div>
+    <!-- Track 2 -->
+    <div class="track">
+      <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="Tulye Omutyere">
+      <div class="track-info">
+        <div class="track-title">Tulye Omutyere</div>
+        <div class="track-meta">By AKZDVEGETARIAN</div>
+        <span class="track-duration" id="duration-tulye"></span>
+        <div class="music-controls" data-track="tulye">
+          <button class="music-btn playpause" aria-label="Play/Pause"><span>►</span></button>
+          <div class="music-progress"><div class="music-progress-bar"></div></div>
+          <span class="music-time" aria-label="Time">0:00 / --:--</span>
+          <audio preload="metadata">
+            <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulye-omutyere_akzd.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulye-omutyere_akzd.mp3" download>Download</a>
+      </div>
+    </div>
+    <!-- Track 3 -->
+    <div class="track">
+      <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="Tulibalukana">
+      <div class="track-info">
+        <div class="track-title">Tulibalukana</div>
+        <div class="track-meta">By AKZD ft Dab Why</div>
+        <span class="track-duration" id="duration-tulibalukana"></span>
+        <div class="music-controls" data-track="tulibalukana">
+          <button class="music-btn playpause" aria-label="Play/Pause"><span>►</span></button>
+          <div class="music-progress"><div class="music-progress-bar"></div></div>
+          <span class="music-time" aria-label="Time">0:00 / --:--</span>
+          <audio preload="metadata">
+            <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulibalukana%20by%20AKZD%20ft%20Dab%20Why-1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/Tulibalukana%20by%20AKZD%20ft%20Dab%20Why-1.mp3" download>Download</a>
+      </div>
+    </div>
+    <!-- Track 4 -->
+    <div class="track">
+      <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="The Answer Foundation">
+      <div class="track-info">
+        <div class="track-title">The Answer Foundation</div>
+        <div class="track-meta">By AKZD ft Datah Pearl</div>
+        <span class="track-duration" id="duration-answer-foundation"></span>
+        <div class="music-controls" data-track="answer-foundation">
+          <button class="music-btn playpause" aria-label="Play/Pause"><span>►</span></button>
+          <div class="music-progress"><div class="music-progress-bar"></div></div>
+          <span class="music-time" aria-label="Time">0:00 / --:--</span>
+          <audio preload="metadata">
+            <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/The%20Answer%20Foundation_by_AKZD_ft_Datah%20Pearl%20-2.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/The%20Answer%20Foundation_by_AKZD_ft_Datah%20Pearl%20-2.mp3" download>Download</a>
+      </div>
+    </div>
+    <!-- Track 5 -->
+    <div class="track">
+      <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="Nkuwa Mukilo">
+      <div class="track-info">
+        <div class="track-title">Nkuwa Mukilo</div>
+        <div class="track-meta">By AKZD MUSIC</div>
+        <span class="track-duration" id="duration-nkuwa-mukilo"></span>
+        <div class="music-controls" data-track="nkuwa-mukilo">
+          <button class="music-btn playpause" aria-label="Play/Pause"><span>►</span></button>
+          <div class="music-progress"><div class="music-progress-bar"></div></div>
+          <span class="music-time" aria-label="Time">0:00 / --:--</span>
+          <audio preload="metadata">
+            <source src="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/NKUWA%20MUKILO%20BY%20AKZD%20MUSIC-1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/NKUWA%20MUKILO%20BY%20AKZD%20MUSIC-1.mp3" download>Download</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Floating Action Buttons Left (site navigation) -->
 <div class="floating-btns-left">
+  <!-- Home/About -->
+  <a class="floating-btn-left" href="#about" title="Home/About" aria-label="Home/About">
+    <span style="font-size: 2em;">🏠</span>
+  </a>
   <!-- Music -->
-  <a class="floating-btn-left" href="index2.html" title="Music" aria-label="Music">
+  <a class="floating-btn-left" href="#music" title="Music" aria-label="Music">
     <span style="font-size: 2em;">🎵</span>
   </a>
   <!-- Videos -->
@@ -161,6 +326,98 @@
 <div class="footer">
   &copy; 2025 AKZDVEGETARIAN. All rights reserved.
 </div>
+<script>
+  // Format seconds to mm:ss
+  function formatDuration(sec) {
+    sec = Math.floor(sec);
+    const min = Math.floor(sec / 60);
+    const s = sec % 60;
+    return min + ":" + (s < 10 ? "0" : "") + s;
+  }
 
+  // Custom controls logic for all tracks
+  document.addEventListener('DOMContentLoaded', function() {
+    const controls = document.querySelectorAll('.music-controls');
+    let currentlyPlaying = null;
+
+    controls.forEach(ctrl => {
+      const audio = ctrl.querySelector('audio');
+      const playpause = ctrl.querySelector('.playpause');
+      const progress = ctrl.querySelector('.music-progress');
+      const progressBar = ctrl.querySelector('.music-progress-bar');
+      const time = ctrl.querySelector('.music-time');
+      const durationId = ctrl.closest('.track-info').querySelector('.track-duration')?.id;
+
+      // Show duration when metadata loads
+      audio.addEventListener('loadedmetadata', function() {
+        if (durationId) {
+          const durSpan = document.getElementById(durationId);
+          if (durSpan) durSpan.textContent = "Duration: " + formatDuration(audio.duration);
+        }
+        time.textContent = "0:00 / " + formatDuration(audio.duration);
+      });
+
+      // Play/pause logic
+      playpause.addEventListener('click', function() {
+        if (audio.paused) {
+          // Pause any other playing audio
+          controls.forEach(otherCtrl => {
+            const otherAudio = otherCtrl.querySelector('audio');
+            if (otherAudio !== audio) {
+              otherAudio.pause();
+              otherCtrl.querySelector('.playpause span').textContent = '►';
+            }
+          });
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      });
+
+      // Update play button and time display
+      audio.addEventListener('play', function() {
+        playpause.querySelector('span').textContent = '❚❚';
+        currentlyPlaying = audio;
+      });
+      audio.addEventListener('pause', function() {
+        playpause.querySelector('span').textContent = '►';
+        if (currentlyPlaying === audio) currentlyPlaying = null;
+      });
+
+      // Progress bar and current time update
+      audio.addEventListener('timeupdate', function() {
+        if (audio.duration) {
+          const percent = (audio.currentTime / audio.duration) * 100;
+          progressBar.style.width = percent + '%';
+          time.textContent = formatDuration(audio.currentTime) + ' / ' + formatDuration(audio.duration);
+        }
+      });
+
+      // Click to seek
+      progress.addEventListener('click', function(e) {
+        if (!audio.duration) return;
+        const rect = progress.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const ratio = x / rect.width;
+        audio.currentTime = ratio * audio.duration;
+      });
+
+      // Reset when ended
+      audio.addEventListener('ended', function() {
+        playpause.querySelector('span').textContent = '►';
+        progressBar.style.width = '0%';
+        time.textContent = "0:00 / " + formatDuration(audio.duration);
+      });
+    });
+
+    // Pause all if navigating away
+    window.addEventListener('beforeunload', function() {
+      controls.forEach(ctrl => {
+        const audio = ctrl.querySelector('audio');
+        audio.pause();
+      });
+    });
+  });
+</script>
 </body>
-</html>
+  </html>
