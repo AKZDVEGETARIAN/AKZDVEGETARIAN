@@ -192,49 +192,7 @@
       outline: none;
       background: #272727;
       box-shadow: 0 1px 9px #f2b70533;
-      }
-    <nav>
-  <a href="#about" class="active">Home</a>
-  <a href="#music">Music</a>
-  <a href="index3.html">Videos</a>
-  <a href="index4.html">Inspiration</a>
-</nav>
-<script>
-  // Make the navigation links "active" based on scroll or url
-  document.addEventListener('DOMContentLoaded', function () {
-    // For single-page sections
-    function setActiveNav() {
-      const links = document.querySelectorAll('nav a');
-      // Default: remove all actives
-      links.forEach(link => link.classList.remove('active'));
-      let found = false;
-
-      // Check for hash links (Home, Music)
-      if (window.location.hash) {
-        links.forEach(link => {
-          if (link.getAttribute('href') === window.location.hash) {
-            link.classList.add('active');
-            found = true;
-          }
-        });
-      }
-      // If no hash or not found, set Home active for root page
-      if (!found && window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) {
-        links[0].classList.add('active');
-      }
-
-      // If on index3.html (Videos) or index4.html (Inspiration), set those active
-      links.forEach(link => {
-        if (window.location.pathname.endsWith(link.getAttribute('href'))) {
-          link.classList.add('active');
-        }
-      });
     }
-
-    setActiveNav();
-    window.addEventListener('hashchange', setActiveNav);
-  });
-</script>
     .contact-info {
       margin: 28px 0 10px 0;
       font-size: 1.05em;
@@ -424,7 +382,6 @@
       color: #f2b705;
       box-shadow: 0 2px 14px #f2b70577, 0 2px 10px #fff6;
     }
-
     /* Floating Buttons Left */
     .floating-btns-left {
       position: fixed;
@@ -501,6 +458,40 @@
       });
     });
   </script>
+  <script>
+    // Make the navigation links "active" based on scroll or url
+    document.addEventListener('DOMContentLoaded', function () {
+      function setActiveNav() {
+        const links = document.querySelectorAll('nav a');
+        links.forEach(link => link.classList.remove('active'));
+        let found = false;
+        // For hash links (Home, Music)
+        if (window.location.hash) {
+          links.forEach(link => {
+            if (link.getAttribute('href') === window.location.hash) {
+              link.classList.add('active');
+              found = true;
+            }
+          });
+        }
+        // If on root or index.html, set Home active
+        if ((!found && (window.location.pathname === '/' || window.location.pathname.endsWith('index.html')))) {
+          links[0].classList.add('active');
+        }
+        // If on index3.html or index4.html, set those active
+        links.forEach(link => {
+          if (
+            (window.location.pathname.endsWith('index3.html') && link.getAttribute('href') === 'index3.html') ||
+            (window.location.pathname.endsWith('index4.html') && link.getAttribute('href') === 'index4.html')
+          ) {
+            link.classList.add('active');
+          }
+        });
+      }
+      setActiveNav();
+      window.addEventListener('hashchange', setActiveNav);
+    });
+  </script>
 </head>
 <body id="top">
 
@@ -511,7 +502,7 @@
 </header>
 
 <nav>
-  <a href="#about" class="active">Home</a>
+  <a href="#about">Home</a>
   <a href="#music">Music</a>
   <a href="index3.html">Videos</a>
   <a href="index4.html">Inspiration</a>
@@ -531,7 +522,6 @@
     <a href="https://wa.me/256706682450" target="_blank">WhatsApp Me: +256 706 682450</a><br>
     <a href="tel:+256782793312">Call Me: +256 782 793312</a>
   </div>
-
   <form id="contact-form">
     <input type="text" name="from_name" placeholder="Your Name" required><br>
     <input type="email" name="reply_to" placeholder="Your Email" required><br>
@@ -539,7 +529,6 @@
     <button type="submit">Send</button>
   </form>
 </section>
-
 
 <!-- Tagged Track 1 -->
 <div class="track">
@@ -554,7 +543,6 @@
     <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/tagmp3_Ebitasoboka-By-AKZD-Music%5BAmbo-beats-0701337598%5D-4.mp3" download>Download Tagged</a>
   </div>
 </div>
-
 <!-- Tagged Track 2 -->
 <div class="track">
   <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="Nkuwa Mukilo (Tagged)">
@@ -568,7 +556,6 @@
     <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/tagmp3_NKUWA-MUKILO-BY-AKZD-MUSIC.mp3" download>Download Tagged</a>
   </div>
 </div>
-
 <!-- Tagged Track 3 -->
 <div class="track">
   <img src="https://i.postimg.cc/9MjN0GB1/Pic-Layer-20257309631469.png" alt="The Answer Foundation (Tagged)">
@@ -582,16 +569,12 @@
     <a class="download-link" href="https://github.com/AKZDVEGETARIAN/AKZDVEGETARIAN/raw/main/tagmp3_The-Answer-Foundation_by_AKZD_ft_Datah-Pearl--2.mp3" download>Download Tagged</a>
   </div>
 </div>
-  </div>
-</section>
-  <script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
   // Get all audio elements on the page
   const audios = document.querySelectorAll('audio');
-
   audios.forEach(audio => {
     audio.addEventListener('play', function() {
-      // Pause all other audios
       audios.forEach(otherAudio => {
         if (otherAudio !== audio) {
           otherAudio.pause();
@@ -600,16 +583,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-  </script>
-
+</script>
 <!-- Floating Action Buttons Left (site navigation) -->
 <div class="floating-btns-left">
-  <!-- Home/About -->
   <a class="floating-btn-left" href="#about" title="Home/About" aria-label="Home/About">
     <span style="font-size: 2em;">🏠</span>
   </a>
+  <a class="floating-btn-left" href="#music" title="Music" aria-label="Music">
+    <span style="font-size: 2em;">🎵</span>
+  </a>
 </div>
-
 <script>
   // Format seconds to mm:ss
   function formatDuration(sec) {
@@ -618,12 +601,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const s = sec % 10;
     return min + ":" + (s < 10 ? "0" : "") + s;
   }
-
   // Custom controls logic for all tracks
   document.addEventListener('DOMContentLoaded', function() {
     const controls = document.querySelectorAll('.music-controls');
     let currentlyPlaying = null;
-
     controls.forEach(ctrl => {
       const audio = ctrl.querySelector('audio');
       const playpause = ctrl.querySelector('.playpause');
@@ -631,7 +612,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const progressBar = ctrl.querySelector('.music-progress-bar');
       const time = ctrl.querySelector('.music-time');
       const durationId = ctrl.closest('.track-info').querySelector('.track-duration')?.id;
-
       // Show duration when metadata loads
       audio.addEventListener('loadedmetadata', function() {
         if (durationId) {
@@ -640,11 +620,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         time.textContent = "0:00 / " + formatDuration(audio.duration);
       });
-
       // Play/pause logic
       playpause.addEventListener('click', function() {
         if (audio.paused) {
-          // Pause any other playing audio
           controls.forEach(otherCtrl => {
             const otherAudio = otherCtrl.querySelector('audio');
             if (otherAudio !== audio) {
@@ -657,7 +635,6 @@ document.addEventListener('DOMContentLoaded', function() {
           audio.pause();
         }
       });
-
       // Update play button and time display
       audio.addEventListener('play', function() {
         playpause.querySelector('span').textContent = '❚❚';
@@ -667,7 +644,6 @@ document.addEventListener('DOMContentLoaded', function() {
         playpause.querySelector('span').textContent = '►';
         if (currentlyPlaying === audio) currentlyPlaying = null;
       });
-
       // Progress bar and current time update
       audio.addEventListener('timeupdate', function() {
         if (audio.duration) {
@@ -676,7 +652,6 @@ document.addEventListener('DOMContentLoaded', function() {
           time.textContent = formatDuration(audio.currentTime) + ' / ' + formatDuration(audio.duration);
         }
       });
-
       // Click to seek
       progress.addEventListener('click', function(e) {
         if (!audio.duration) return;
@@ -685,7 +660,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const ratio = x / rect.width;
         audio.currentTime = ratio * audio.duration;
       });
-
       // Reset when ended
       audio.addEventListener('ended', function() {
         playpause.querySelector('span').textContent = '►';
@@ -693,7 +667,6 @@ document.addEventListener('DOMContentLoaded', function() {
         time.textContent = "0:00 / " + formatDuration(audio.duration);
       });
     });
-
     // Pause all if navigating away
     window.addEventListener('beforeunload', function() {
       controls.forEach(ctrl => {
@@ -704,18 +677,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 </script>
 </body>
- <!-- Floating Action Buttons Left (site navigation) -->
-<div class="floating-btns-left">
-  <!-- Home/About -->
-  <a class="floating-btn-left" href="#about" title="Home/About" aria-label="Home/About">
-    <span style="font-size: 2em;">🏠</span>
-  </a>
-  <!-- Music Button -->
-  <a class="floating-btn-left" href="#music" title="Music" aria-label="Music">
-    <span style="font-size: 2em;">🎵</span>
-  </a>
-</div>
-  </html>
 <div class="footer">
   &copy; 2025 AKZDVEGETARIAN. All rights reserved.
   <span style="display:block; margin-top:10px; font-size:13px; color:#f2b70599; letter-spacing:0.5px;">
