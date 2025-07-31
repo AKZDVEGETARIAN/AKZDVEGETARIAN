@@ -192,26 +192,49 @@
       outline: none;
       background: #272727;
       box-shadow: 0 1px 9px #f2b70533;
+      }
+    <nav>
+  <a href="#about" class="active">Home</a>
+  <a href="#music">Music</a>
+  <a href="index3.html">Videos</a>
+  <a href="index4.html">Inspiration</a>
+</nav>
+<script>
+  // Make the navigation links "active" based on scroll or url
+  document.addEventListener('DOMContentLoaded', function () {
+    // For single-page sections
+    function setActiveNav() {
+      const links = document.querySelectorAll('nav a');
+      // Default: remove all actives
+      links.forEach(link => link.classList.remove('active'));
+      let found = false;
+
+      // Check for hash links (Home, Music)
+      if (window.location.hash) {
+        links.forEach(link => {
+          if (link.getAttribute('href') === window.location.hash) {
+            link.classList.add('active');
+            found = true;
+          }
+        });
+      }
+      // If no hash or not found, set Home active for root page
+      if (!found && window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) {
+        links[0].classList.add('active');
+      }
+
+      // If on index3.html (Videos) or index4.html (Inspiration), set those active
+      links.forEach(link => {
+        if (window.location.pathname.endsWith(link.getAttribute('href'))) {
+          link.classList.add('active');
+        }
+      });
     }
-    button {
-      background: linear-gradient(90deg, #f2b705 80%, #ffe088 110%);
-      color: #222;
-      border: none;
-      border-radius: 7px;
-      padding: 13px 32px;
-      font-size: 1.07em;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 1.5px 8px #f2b70555;
-      letter-spacing: 1px;
-      transition: background 0.22s, color 0.22s, filter 0.22s;
-      filter: brightness(1.085);
-    }
-    button:hover {
-      background: #fff;
-      color: #f2b705;
-      filter: brightness(1.025);
-    }
+
+    setActiveNav();
+    window.addEventListener('hashchange', setActiveNav);
+  });
+</script>
     .contact-info {
       margin: 28px 0 10px 0;
       font-size: 1.05em;
